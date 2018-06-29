@@ -7,4 +7,6 @@ category: command
 tags: []
 ---
 
-![]({{/assets/images/post/git-command.jpg | absolute_url }})pl
+![]({{"/assets/images/post/git-command.jpg" | absolute_url }})
+
+pl
