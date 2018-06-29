@@ -7,7 +7,7 @@
 title: 把不懂的记下来，就懂了
 subtitle:
 description:
-author: ohmygodlin
+author: ohmygod
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: zh-Hans
 date_format: '%Y-%m-%d'
@@ -381,7 +381,7 @@ han: false
 # Disqus
 disqus:
   enable: true
-  shortname:
+  shortname: ohmygod
   count: true
   # hide comments (visitors need to click to load the comments)
   # count need to be false when hide is true
