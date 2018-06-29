@@ -221,6 +221,7 @@ ssize_t _IO_file_read (FILE *fp, void *buf, ssize_t size)
 因此fread对于调用vtable的顺序为：
 
 **8 JUMP_INIT(xsgetn, _IO_file_xsgetn)**
+
 **14 JUMP_INIT(read, _IO_file_read)**
 
 ## size_t fwrite(const void\* buffer, size_t size, size_t count, FILE* stream)
@@ -315,7 +316,9 @@ vfprintf+11 -> \_IO_file_xsputn ->_IO_file_overflow -> funlockfile -> _IO_file_w
 因此fwrite/printf/puts对于调用vtable的顺序为：
 
 **7 JUMP_INIT(xsputn, _IO_file_xsputn)**
+
 **3 JUMP_INIT(overflow, _IO_file_overflow)**
+
 **15 JUMP_INIT(write, _IO_new_file_write)**
 
 ## int fclose(FILE \*stream)
@@ -378,4 +381,5 @@ libc_hidden_ver (_IO_new_file_finish, _IO_file_finish)
 因此fclose对于调用vtable的顺序为：
 
 **17 JUMP_INIT(close, _IO_file_close)**
+
 **2 JUMP_INIT(finish, _IO_file_finish)**
