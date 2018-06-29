@@ -4,7 +4,7 @@ title: "glibc中的File结构"
 date: 2018-06-29 15:17:49 +0800
 description: ""
 category: ctf/bin
-tags: []
+tags: [pwn, vtable]
 ---
 
 程序执行fopen等函数时会创建FILE结构，并分配在堆中，我们常定义一个指向FILE结构的指针来接收这个返回值。进程中的FILE结构会通过\_chain域彼此连接形成一个单向链表，链表头部用全局变量\_IO_list_all表示，通过这个值我们可以遍历所有的FILE结构，新加一个FILE节点会从链表头插入，同时更新链表头为这个新节点。
