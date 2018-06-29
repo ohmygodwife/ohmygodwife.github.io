@@ -17,6 +17,10 @@ some useful markdown syntax
 
 ```markdown
 ![]({{"/assets/images/post/git-command.jpg" | absolute_url }}) #include image
-[unsortbin泄漏main_arena](#unsortbin泄漏main_arena) #local href
+[unsortbin泄漏main_arena](#unsortbin泄漏main_arena "鼠标悬浮文字") #local href
+| 标题和内容居左 | 标题和内容居中 | 标题居中内容居左  | 标题和内容居右 | #table
+| :----------- | :-----------: | ---------------- | ------------: |
+| 居左| 居中| 居中和居左| 居右|
+<font face="微软雅黑" color="red" size="3">字体及字体颜色和大小</font>
 ```
 
