@@ -221,7 +221,6 @@ ssize_t _IO_file_read (FILE *fp, void *buf, ssize_t size)
 因此fread对于调用vtable的顺序为：
 
 **8 JUMP_INIT(xsgetn, _IO_file_xsgetn)**
-
 **14 JUMP_INIT(read, _IO_file_read)**
 
 ## size_t fwrite(const void\* buffer, size_t size, size_t count, FILE* stream)
@@ -316,9 +315,7 @@ vfprintf+11 -> \_IO_file_xsputn ->_IO_file_overflow -> funlockfile -> _IO_file_w
 因此fwrite/printf/puts对于调用vtable的顺序为：
 
 **7 JUMP_INIT(xsputn, _IO_file_xsputn)**
-
 **3 JUMP_INIT(overflow, _IO_file_overflow)**
-
 **15 JUMP_INIT(write, _IO_new_file_write)**
 
 ## int fclose(FILE \*stream)
@@ -353,46 +350,32 @@ typedef void (*_IO_finish_t) (FILE , int); / finalize */
 
 fclose依次调用vtable中的\_IO_close指针，index=17和_IO_finish指针，index=2。最终会调用系统调用close函数。
 
+```c
 ./libio/fileops.c:  
-
 int _IO_file_close (FILE *fp)
-
 {
-
   /* Cancelling close should be avoided if possible since it leaves an
-
-​     unrecoverable state behind.  */
-
-  return __close_nocancel (fp->_fileno);
-
+     unrecoverable state behind.  */
+  return _close_nocancel (fp->fileno);
 }
 
 void _IO_new_file_finish (FILE *fp, int dummy)
-
 {
-
   if (_IO_file_is_open (fp))
-
-​    {
-
-​      _IO_do_flush (fp);
-
-​      if (!(fp->_flags & _IO_DELETE_DONT_CLOSE))
-
-​        _IO_SYSCLOSE (fp);
-
-​    }
-
+    {
+      _IO_do_flush (fp);
+      if (!(fp->_flags & _IO_DELETE_DONT_CLOSE))
+        _IO_SYSCLOSE (fp);
+    }
   _IO_default_finish (fp, 0);
-
 }
 
 libc_hidden_ver (_IO_new_file_finish, _IO_file_finish)
 
-./sysdeps/generic/not-cancel.h:#define __close_nocancel(fd) __close (fd)
+./sysdeps/generic/not-cancel.h:#define close_nocancel(fd) close (fd)
+```
 
 因此fclose对于调用vtable的顺序为：
 
-17 JUMP_INIT(close, _IO_file_close)
-
-2 JUMP_INIT(finish, _IO_file_finish)
+**17 JUMP_INIT(close, _IO_file_close)**
+**2 JUMP_INIT(finish, _IO_file_finish)**
