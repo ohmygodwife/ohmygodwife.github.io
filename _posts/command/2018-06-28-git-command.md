@@ -9,15 +9,15 @@ tags: [git]
 
 ![]({{"/assets/images/post/git-command.jpg" | absolute_url }})
 
-#### [git仓库](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%8E%B7%E5%8F%96-Git-%E4%BB%93%E5%BA%93)
+## [git仓库](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%8E%B7%E5%8F%96-Git-%E4%BB%93%E5%BA%93)
 
 **新建本地仓库**（local repository）方法有两种：
 
 1. 根据本地已有项目，进入该项目目录，运行：
 
-```sh
-$ git init
-```
+   ```sh
+   $ git init
+   ```
 
 2. 克隆远端仓库（remote repository）
 
@@ -111,7 +111,7 @@ $ git config --global alias.last 'log -1 HEAD'
 $ git config --global alias.visual '!gitk' #命令前面加入!符号，表示执行外部命令，因此git visual，等价于运行gitk
 ```
 
-#### [git分支](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E4%BD%95%E8%B0%93%E5%88%86%E6%94%AF) 
+## [git分支](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E4%BD%95%E8%B0%93%E5%88%86%E6%94%AF) 
 
 提交（commit）对象：包含一个指向暂存内容快照的指针，包含本次提交的作者等相关附属信息，包含零个或多个指向该提交对象的父对象指针。git可以认为是管理commit的系统，由一个commit列表（old<-new）构成一个分支（branch），branch本质上是指向commit列表头的可变指针，随着每次提交向新commit的对象移动。
 
