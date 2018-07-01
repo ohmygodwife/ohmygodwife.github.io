@@ -159,22 +159,19 @@ $ git checkout -b testing #新建并切换branch，等效于上面两条指令
    $ git commit -a -m 'finished the new footer [new_feature]'
    ```
 
-注意之前bug_fix的修改并没有在new_feature中。如果需要纳入此次修改，可以用 `git merge master` 把`master`合并到 `new_feature`；或者等 `new_feature` 完成之后，再将 `new_feature` 分支中的更新并入`master`。
+   注意之前bug_fix的修改并没有在new_feature中。如果需要纳入此次修改，可以用 `git merge master` 把`master`合并到 `new_feature`；或者等 `new_feature` 完成之后，再将 `new_feature` 分支中的更新并入`master`。
 
 4. 等new_feature完成之后，合并回master
 
    ```sh
    $ git checkout master
    $ git merge new_feature
-   #由于master不是new_feature直接上游，出现文件冲突时，先通过git status查阅
-   $ git status
-   #之后可以通过手工修改，然后git add；或调用可视化工具
-   $ git mergetool
-   #再运行一次 git status 来确认所有冲突都已解决
-   $ git status
+   $ git status #由于master不是new_feature直接上游，出现文件冲突时，先通过git status查阅
+   $ git mergetool #之后可以通过手工修改，然后git add；或调用可视化工具
+   $ git status #再运行一次 git status 来确认所有冲突都已解决
    ```
 
-或者采用变基（rebase）方式，可以得到一个较为整洁的commit历史，建议采用此方式
+   或者采用变基（rebase）方式，可以得到一个较为整洁的commit历史，建议采用此方式
 
    ```sh
    $ git checkout new_feature
@@ -184,6 +181,6 @@ $ git checkout -b testing #新建并切换branch，等效于上面两条指令
    $ git merge new_feature #可以进行快进合并
    ```
 
-奇妙的变基也并非完美无缺，要用它得遵守一条准则：
+   奇妙的变基也并非完美无缺，要用它得遵守一条准则：
 
-**不要对在你的仓库外有副本的分支执行变基。** 
+   **不要对在你的仓库外有副本的分支执行变基。** 
