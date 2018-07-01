@@ -21,9 +21,9 @@ tags: [git]
 
 2. 克隆远端仓库（remote repository）
 
-```sh
-$ git clone https://github.com/***/***.git
-```
+   ```sh
+   $ git clone https://github.com/***/***.git
+   ```
 
 git clone完成之后，git会自动将remote repository命名为**origin**（可以采用-o <name>改名），并基于origin/master，创建了一个local branch：master，此时两者指向同一个commit对象。
 
@@ -133,56 +133,56 @@ $ git checkout -b testing #新建并切换branch，等效于上面两条指令
 
 1. 在master切换到新的branch：new_feature，并进行相应的改动
 
-```sh
-$ git checkout -b new_feature
-$ vim index.html
-$ git commit -a -m 'added a new footer [new_feature]'
-```
+   ```sh
+   $ git checkout -b new_feature
+   $ vim index.html
+   $ git commit -a -m 'added a new footer [new_feature]'
+   ```
 
 2. 突然需要在master进行漏洞修复，先基于master创建一个新的branch：bug_fix，待完整测试无误后再合并到master
 
-```sh
-$ git checkout master #切换回master
-$ git checkout -b bug_fix #新建并切换到bugfix
-$ vim index.html
-$ git commit -a -m 'fix bug'
-$ git checkout master
-$ git merge bug_fix #由于当前master所在的提交对象是要并入的bug_fix分支的直接上游，只需把master指针直接右移（快进合并）
-$ git branch -d bug_fix #由于bug_fix和master指向相同commit，可以删掉
-```
+   ```sh
+   $ git checkout master #切换回master
+   $ git checkout -b bug_fix #新建并切换到bugfix
+   $ vim index.html
+   $ git commit -a -m 'fix bug'
+   $ git checkout master
+   $ git merge bug_fix #由于当前master所在的提交对象是要并入的bug_fix分支的直接上游，只需把master指针直接右移（快进合并）
+   $ git branch -d bug_fix #由于bug_fix和master指向相同commit，可以删掉
+   ```
 
 3. 回到new_feature，继续工作。
 
-```sh
-$ git checkout new_feature
-$ vim index.html
-$ git commit -a -m 'finished the new footer [new_feature]'
-```
+   ```sh
+   $ git checkout new_feature
+   $ vim index.html
+   $ git commit -a -m 'finished the new footer [new_feature]'
+   ```
 
 注意之前bug_fix的修改并没有在new_feature中。如果需要纳入此次修改，可以用 `git merge master` 把`master`合并到 `new_feature`；或者等 `new_feature` 完成之后，再将 `new_feature` 分支中的更新并入`master`。
 
 4. 等new_feature完成之后，合并回master
 
-```sh
-$ git checkout master
-$ git merge new_feature
-#由于master不是new_feature直接上游，出现文件冲突时，先通过git status查阅
-$ git status
-#之后可以通过手工修改，然后git add；或调用可视化工具
-$ git mergetool
-#再运行一次 git status 来确认所有冲突都已解决
-$ git status
-```
+   ```sh
+   $ git checkout master
+   $ git merge new_feature
+   #由于master不是new_feature直接上游，出现文件冲突时，先通过git status查阅
+   $ git status
+   #之后可以通过手工修改，然后git add；或调用可视化工具
+   $ git mergetool
+   #再运行一次 git status 来确认所有冲突都已解决
+   $ git status
+   ```
 
 或者采用变基（rebase）方式，可以得到一个较为整洁的commit历史，建议采用此方式
 
-```sh
-$ git checkout new_feature
-$ git rebase master #将master变为new_feature直接上游
-$ git rebase master new_feature #等效于上两个命令
-$ git checkout master
-$ git merge new_feature #可以进行快进合并
-```
+   ```sh
+   $ git checkout new_feature
+   $ git rebase master #将master变为new_feature直接上游
+   $ git rebase master new_feature #等效于上两个命令
+   $ git checkout master
+   $ git merge new_feature #可以进行快进合并
+   ```
 
 奇妙的变基也并非完美无缺，要用它得遵守一条准则：
 
