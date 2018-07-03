@@ -78,6 +78,7 @@ origin  https://github.com/ohmygodlin/ohmygodlin.github.io.git (push)
 $ git remote add pb https://github.com/paulboone/ticgit #添加远程仓库
 pb	https://github.com/paulboone/ticgit (fetch)
 pb	https://github.com/paulboone/ticgit (push)
+$ git git remote set-url origin https://... #更改远程仓库
 $ git fetch pb #从远程仓库拉取
 $ git push origin master #[remote repository] [remote branch]可省略
 $ git remote show origin #查看某个远程仓库详细信息
