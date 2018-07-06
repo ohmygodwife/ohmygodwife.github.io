@@ -4,6 +4,7 @@ require "rubygems"
 require 'rake'
 require 'yaml'
 require 'time'
+require 'fileutils'
 
 SOURCE = "."
 CONFIG = {
@@ -60,7 +61,7 @@ task :post do
   end
   dir = category.empty? ? CONFIG['posts'] : File.join(CONFIG['posts'], category)
   if !File.directory?(dir)
-    Dir.mkdir(dir)
+    FileUtils::mkdir_p(dir)
   end
   filename = File.join(dir, "#{date}-#{slug}.#{CONFIG['post_ext']}")
   if File.exist?(filename)
