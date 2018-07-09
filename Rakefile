@@ -51,7 +51,7 @@ task :post do
   tags = ENV["tags"] || "[]"
   category = ENV["category"] || ""
   category = "#{category.gsub(/-/,' ')}" if !category.empty?
-  slug = title.downcase.strip.gsub(' ', '-')#.gsub(/[^\w-]/, '')
+  slug = title.strip.gsub(' ', '-')#.gsub(/[^\w-]/, '')
   begin
     timestamp = ENV['date'] ? Time.parse(ENV['date']) : Time.now
     date = timestamp.strftime('%Y-%m-%d')
