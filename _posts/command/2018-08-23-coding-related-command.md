@@ -14,10 +14,37 @@ tags: []
 >cl.exe /Fe:solve.exe main.cpp #/Fe:指定输出文件名
 ```
 
-GCC编译C/C++代码
+#### GCC编译C/C++代码
 
 ```sh
 $g++ main.cpp -o solve.exe
 $gcc main.c -o solve.exe
 ```
+
+#### [LuaRocks](https://github.com/luarocks/luarocks)管理[Lua](https://www.lua.org/)模块（类似pip）
+
+根据[安装文档](https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows)，下载[最新的win32.zip](http://luarocks.github.io/luarocks/releases)。
+
+```sh
+SET PREFIX=D:\Program Files\luarocks
+INSTALL /P %PREFIX% /SELFCONTAINED /NOADMIN /L #/L表示安装附带的Lua5.1，如果本地有Lua可以不用
+```
+
+将下列三个变量设置到环境变量
+
+```powershell
+PATH     :   D:\Program Files\luarocks #用于启动luarocks
+LUA_PATH :   D:\Program Files\luarocks\systree\share\lua\5.1\?.lua;D:\Program Files\luarocks\systree\share\lua\5.1\?\init.lua #用于搜索lua文件
+LUA_CPATH:   D:\Program Files\luarocks\systree\lib\lua\5.1\?.dll #用于搜索C动态库
+```
+
+查找模块地址：https://luarocks.org/。下载安装模块如果需要编译代码则需要先运行VS环境配置
+
+```powershell
+>"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+>luarocks install luabitop #安装bit操作库
+>lua5.1 solve.lua #不再报错：lua5.1: solve.lua:1: module 'bit' not found
+```
+
+
 
