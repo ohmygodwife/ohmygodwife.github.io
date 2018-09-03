@@ -78,12 +78,19 @@ origin  https://github.com/ohmygodlin/ohmygodlin.github.io.git (push)
 $ git remote add pb https://github.com/paulboone/ticgit #添加远程仓库
 pb	https://github.com/paulboone/ticgit (fetch)
 pb	https://github.com/paulboone/ticgit (push)
-$ git git remote set-url origin https://... #更改远程仓库
+$ git remote set-url origin https://... #更改远程仓库
 $ git fetch pb #从远程仓库拉取
 $ git push origin master #[remote repository] [remote branch]可省略
 $ git remote show origin #查看某个远程仓库详细信息
 $ git remote rename pb paul #重命名
 $ git remote rm paul #删除
+```
+
+[将项目同时提交到多个git仓库](http://feitianbenyue.iteye.com/blog/2376791)
+
+```sh
+$ git remote set-url --add origin https://... #让远程库origin拥有多个url地址，push到多个，从第一个get，如果需要改变get的路径，直接修改.git/config文件中url的顺序
+$ git push -f origin master #本地内容强制覆盖推向远程仓库
 ```
 
 注意：`git fetch` 命令会将数据拉取到你的本地仓库，它并不会自动合并或修改你当前的工作。而`git pull` 通常会从最初克隆的服务器上抓取数据并自动尝试合并到当前所在的分支。 可以认为`git pull`是`git fetch`和`git merge`两个步骤的结合。
