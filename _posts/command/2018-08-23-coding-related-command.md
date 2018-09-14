@@ -21,6 +21,11 @@ $g++ main.cpp -o solve.exe
 $gcc main.c -o solve.exe
 ```
 
+#### [下载Java OpenSDK源代码](https://stackoverflow.com/questions/410756/is-it-possible-to-browse-the-source-of-openjdk-online/410780#410780)
+
+http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/
+选类似Mergejdk8u192-b03的版本->browse（左侧导航栏）->src->share->classes->zip（左侧导航栏）
+
 #### [LuaRocks](https://github.com/luarocks/luarocks)管理[Lua](https://www.lua.org/)模块（类似pip）
 
 根据[安装文档](https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Windows)，下载[最新的win32.zip](http://luarocks.github.io/luarocks/releases)。
