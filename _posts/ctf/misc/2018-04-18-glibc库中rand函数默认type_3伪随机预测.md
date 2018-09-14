@@ -3,7 +3,7 @@ layout: post
 title: "glibc库中rand函数默认TYPE_3伪随机预测"
 date: 2018-04-18 20:08:23 +0800
 description: ""
-category: ctf/bin
+category: ctf/misc
 tags: [glibc, rand]
 ---
 
