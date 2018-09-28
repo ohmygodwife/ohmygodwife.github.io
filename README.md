@@ -24,3 +24,19 @@ some useful markdown syntax
 <font face="微软雅黑" color="red" size="3">字体及字体颜色和大小</font>
 ```
 
+enable Latex in header of post:
+
+```markdown
+mathjax: true
+```
+
+some useful Latex
+
+```latex
+\equiv #恒等
+\approx #约等
+\int_{-N}^{N} e^x\, dx #积分
+\pi #π
+\sqrt[n]{m} #对m开n次方
+```
+
