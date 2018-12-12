@@ -21,6 +21,13 @@ $g++ main.cpp -o solve.exe
 $gcc main.c -o solve.exe
 ```
 
+#### Python通过setup.py安装卸载
+
+```sh
+$python setup.py install --record files.txt #记录安装后文件的路径
+$cat files.txt | xargs rm -rf  #删除这些文件
+```
+
 #### [下载Java OpenSDK源代码](https://stackoverflow.com/questions/410756/is-it-possible-to-browse-the-source-of-openjdk-online/410780#410780)
 
 http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/

@@ -36,7 +36,10 @@ some useful Latex
 \equiv #恒等
 \approx #约等
 \int_{-N}^{N} e^x\, dx #积分
+\sum_{i=1}^k #求和
+\prod_{i=1}^k #求积
 \pi #π
 \sqrt[n]{m} #对m开n次方
+\frac{3}{5} #分数
 ```
 
