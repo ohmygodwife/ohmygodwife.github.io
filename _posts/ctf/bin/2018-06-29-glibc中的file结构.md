@@ -9,15 +9,28 @@ tags: [pwn, vtable]
 
 程序执行fopen等函数时会创建FILE结构，并分配在堆中，我们常定义一个指向FILE结构的指针来接收这个返回值。进程中的FILE结构会通过\_chain域彼此连接形成一个单向链表，链表头部用全局变量\_IO_list_all表示，通过这个值我们可以遍历所有的FILE结构，新加一个FILE节点会从链表头插入，同时更新链表头为这个新节点。
 
-在标准I/O库中，每个程序启动时有三个文件流是自动打开的：stdin、stdout、stderr。因此在初始状态下，\_IO_list_all指向了一个有这些文件流构成的链表（\_IO_list_all=**stderr->stdout->stdin**）。我们可以在libc.so中找到stdin\stdout\stderr等符号，这些符号是指向FILE结构的指针，真正结构的符号是
-
-\_IO_2_1_stderr\_/\_IO_2_1_stdout\_/\_IO_2_1_stdin\_
-
-比如在gdb中查看stdin地址：
+在标准I/O库中，每个程序启动时有三个文件流是自动打开的：stdin、stdout、stderr。因此在初始状态下，\_IO_list_all指向了一个有这些文件流构成的链表（\_IO_list_all=**stderr->stdout->stdin**）。我们可以在libc.so中找到stdin、stdout、stderr等符号，这些符号是指向FILE结构的指针，真正结构的符号是`_IO_2_1_stderr_, _IO_2_1_stdout_, _IO_2_1_stdin_`。
 
 ```assembly
-pwndbg>print &IO_2_1_stdin
-$2 = (struct IO_FILE_plus *) 0x7ffff7dd18e0 <IO_2_1_stdin_>
+pwndbg> x/100gx &_IO_list_all
+0x7ffff7dd2520 <_IO_list_all>:	0x00007ffff7dd2540	0x0000000000000000 #point to stderr
+0x7ffff7dd2530:	0x0000000000000000	0x0000000000000000
+0x7ffff7dd2540 <_IO_2_1_stderr_>:	0x00000000fbad2087	0x00007ffff7dd25c3
+...
+0x7ffff7dd25a0 <_IO_2_1_stderr_+96>:	0x0000000000000000	0x00007ffff7dd2620 #point to stdout
+...
+0x7ffff7dd2610 <_IO_2_1_stderr_+208>:	0x0000000000000000	0x00007ffff7dd06e0 #vtable
+0x7ffff7dd2620 <_IO_2_1_stdout_>:	0x00000000fbad2887	0x00007ffff7dd26a3
+...
+0x7ffff7dd2680 <_IO_2_1_stdout_+96>:	0x0000000000000000	0x00007ffff7dd18e0 #point to stdin
+...
+0x7ffff7dd26f0 <_IO_2_1_stdout_+208>:	0x0000000000000000	0x00007ffff7dd06e0 #vtable
+pwndbg> x/50gx &_IO_2_1_stdin_
+0x7ffff7dd18e0 <_IO_2_1_stdin_>:	0x00000000fbad208b	0x00007ffff7dd1964
+...
+0x7ffff7dd1940 <_IO_2_1_stdin_+96>:	0x0000000000000000	0x0000000000000000 #point to null
+...
+0x7ffff7dd19b0 <_IO_2_1_stdin_+208>:	0x0000000000000000	0x00007ffff7dd06e0 #vtable
 ```
 
 注意：这三个文件流位于libc.so的数据段，而我们使用fopen创建的文件流是分配在堆内存上的。
@@ -62,20 +75,20 @@ struct _IO_FILE
 {
   int _flags;           /* High-order word is _IO_MAGIC; rest is flags. */
   /* The following pointers correspond to the C++ streambuf protocol. */
-  char _IO_read_ptr;   / Current read pointer */
-  char _IO_read_end;   / End of get area. */
-  char _IO_read_base;  / Start of putback+get area. */
-  char _IO_write_base; / Start of put area. */
-  char _IO_write_ptr;  / Current put pointer. */
-  char _IO_write_end;  / End of put area. */
-  char _IO_buf_base;   / Start of reserve area. */
-  char _IO_buf_end;    / End of reserve area. */
+  char* _IO_read_ptr;   / Current read pointer */
+  char* _IO_read_end;   / End of get area. */
+  char* _IO_read_base;  / Start of putback+get area. */
+  char* _IO_write_base; / Start of put area. */ //offset = 0x20
+  char* _IO_write_ptr;  / Current put pointer. */ offset = 0x28
+  char* _IO_write_end;  / End of put area. */
+  char* _IO_buf_base;   / Start of reserve area. */
+  char* _IO_buf_end;    / End of reserve area. */
   /* The following fields are used to support backing up and undo. */
-  char _IO_save_base; / Pointer to start of non-current get area. */
-  char _IO_backup_base;  / Pointer to first valid character of backup area */
-  char _IO_save_end; / Pointer to end of non-current get area. */
-  struct IO_marker *markers;
-  struct IO_FILE *chain;
+  char* _IO_save_base; / Pointer to start of non-current get area. */
+  char* _IO_backup_base;  / Pointer to first valid character of backup area */
+  char* _IO_save_end; / Pointer to end of non-current get area. */
+  struct IO_marker *_markers;
+  struct IO_FILE *_chain; // point to next file node, offset = 0x68
   int _fileno;
   int _flags2;
   __off_t _old_offset; /* This used to be _offset but it's too small.  */
@@ -83,7 +96,7 @@ struct _IO_FILE
   unsigned short _cur_column;
   signed char _vtable_offset;
   char _shortbuf[1];
-  IO_lock_t *lock;
+  IO_lock_t *_lock;
 #ifdef _IO_USE_OLD_IO_FILE // undefined, so would be complete struct
 };
 struct _IO_FILE_complete
@@ -94,9 +107,9 @@ struct _IO_FILE_complete
   _IO_off64_t _offset;
 # if defined _LIBC || defined _GLIBCPP_USE_WCHAR_T
   /* Wide character stream stuff.  */
-  struct IO_codecvt *codecvt;
-  struct IO_wide_data *wide_data;
-  struct IO_FILE *freeres_list;
+  struct _IO_codecvt *_codecvt;
+  struct _IO_wide_data *_wide_data;
+  struct _IO_FILE *_freeres_list;
   void *_freeres_buf;
 # else
   void *__pad1;
@@ -105,7 +118,7 @@ struct _IO_FILE_complete
   void *__pad4;
 # endif
   size_t __pad5;
-  int _mode;
+  int _mode;  //offset = 0xc0, int length = 4 bytes
   /* Make sure we don't get into trouble again.  */
   char _unused2[15 * sizeof (int) - 4 * sizeof (void *) - sizeof (size_t)];
 #endif
@@ -383,3 +396,4 @@ libc_hidden_ver (_IO_new_file_finish, _IO_file_finish)
 **17 JUMP_INIT(close, _IO_file_close)**
 
 **2 JUMP_INIT(finish, _IO_file_finish)**
+
