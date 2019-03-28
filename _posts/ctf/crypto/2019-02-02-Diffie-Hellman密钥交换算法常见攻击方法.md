@@ -13,9 +13,11 @@ mathjax: true
 公开的素数p和p的本原单位根（primitive root module p）记为g，可通过sagemath函数计算得到：`g=primitive_root(p)`。原单位根定义为：g的1到p-1次幂模p的值各不相同，即：`g mod p, g^2 mod p,g^(p-1)mod p`组成1到p-1的所有整数。
 
 服务器端 ：私钥和公钥分别是a和A，客户端私钥和公钥分别为b和B
+
 $$
 A=g^a\mod p\\B=g^b\mod p\\服务器端得到客户端公钥B后，计算共享密钥K=B^a\mod p=(g^b\mod p)^a=g^{ab}\mod p\\客户器端得到服务端公钥A后，计算共享密钥K=A^b\mod p=(g^a\mod p)^b=g^{ab}\mod p
 $$
+
 指数a称为A以g为基数的模p的离散对数（指数），记为：ind_g,p(A)。可见：DH算法的有效性依赖于计算离散对数的难度，即通过公钥难以直接计算私钥。（对比：RSA一般是计算模根）
 
 #### A，g，p较小，直接计算a
