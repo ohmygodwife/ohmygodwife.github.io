@@ -50,7 +50,7 @@ Java 1.7版本的ConcurrentHashMap采用`Segment` + `HashEntry`的方式实现�
 
 ####  Java 1.8
 
-Java 1.8版本放弃了`Segment`臃肿的设计，取而代之的是采用`Node` + `CAS` + `Synchronized`来保证并发安全进行实现，底层数据结构改变为采用**数组+链表+红黑树**的数据形式。由于synchronzied做了很多的优化，包括偏向锁，轻量级锁，因此，使用synchronized相较于ReentrantLock的性能会持平甚至在某些情况更优。
+Java 1.8版本放弃了`Segment`臃肿的设计，取而代之的是采用`Node` + `CAS` + `Synchronized`来保证并发安全进行实现，底层数据结构改变为采用**数组+链表+红黑树**的数据形式。由于synchronzied做了很多的优化，包括偏向锁、轻量级锁。因此，使用synchronized相较于ReentrantLock的性能会持平甚至在某些情况更优。
 
 ![]({{"/assets/images/post/concurrenthashmap-1.8.png" | absolute_url }})
 
