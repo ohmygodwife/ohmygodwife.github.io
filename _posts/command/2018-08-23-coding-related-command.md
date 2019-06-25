@@ -10,7 +10,7 @@ tags: []
 #### [Visual Studio编译C/C++代码](https://msdn.microsoft.com/zh-cn/library/f2ccy3wt.aspx)
 
 ```powershell
->"D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64 #不指定默认32bit
+>"C:\Users\tyler\AppData\Local\Programs\Common\Microsoft\Visual C++ for Python\9.0\vcvarsall.bat" amd64 #不指定默认32bit
 >cl.exe /Fe:solve.exe main.cpp #/Fe:指定输出文件名
 ```
 
