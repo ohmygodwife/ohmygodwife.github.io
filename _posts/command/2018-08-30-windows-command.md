@@ -28,6 +28,12 @@ tags: []
 net use Z: "\\vmware-host\Shared Folders"
 ```
 
+#### [Powershell在此系统上禁止运行脚本](https://www.jianshu.com/p/e5214b3a7627)
+
+```powershell
+set-ExecutionPolicy ALLSIGNED
+```
+
 #### notepad++
 
 ```powershell
