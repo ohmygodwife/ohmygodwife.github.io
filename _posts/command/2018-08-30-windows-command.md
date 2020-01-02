@@ -7,6 +7,13 @@ category: command
 tags: []
 ---
 
+#### 进程查看与终止
+
+```
+wmic path win32_process get ProcessId,commandline > commandline.txt #不指定列名时打印所有字段
+taskkill /PID 1234
+```
+
 #### 添加程序到右键发送到
 
 右键->创建快捷方式，资源管理器输入shell:sendto，将快捷方式剪切过去
@@ -55,3 +62,4 @@ vmware-vdiskmanager.exe -k "F:\Fc\FC.vmdk"
 #### VirturalBox更新后休眠的虚拟机报错误E_FAIL (0x80004005) 
 
 右键->清除保存的状态，设置->USB设备->停用USB控制器
+

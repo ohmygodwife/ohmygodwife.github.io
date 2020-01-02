@@ -41,5 +41,6 @@ some useful Latex
 \pi #π
 \sqrt[n]{m} #对m开n次方
 \frac{3}{5} #分数
+\bmod #模
 ```
 
