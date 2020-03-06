@@ -21,6 +21,12 @@ $g++ main.cpp -o solve.exe
 $gcc main.c -o solve.exe
 ```
 
+#### Pip安装指定源
+
+```shell
+pip install -i http://pypi.douban.com/simple --trusted-host pypi.douban.com software
+```
+
 #### Python通过setup.py安装卸载
 
 ```sh
@@ -65,5 +71,12 @@ LUA_CPATH:   D:\Program Files\luarocks\systree\lib\lua\5.1\?.dll #用于搜索C�
 >lua5.1 solve.lua #不再报错：lua5.1: solve.lua:1: module 'bit' not found
 ```
 
+#### Ubuntu安装Mysql
 
+```shell
+sudo apt-get install mysql-server
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# bind-address = 127.0.0.1 #注释这一行
+service mysql restart
+```
 
