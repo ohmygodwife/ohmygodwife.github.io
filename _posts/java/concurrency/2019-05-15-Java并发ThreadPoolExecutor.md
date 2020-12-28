@@ -118,6 +118,55 @@ ScheduledThreadPoolExecutor最大的特色是能够周期性执行异步任务�
 
 DelayedWorkQueue是一个基于堆的数据结构，类似于DelayQueue和PriorityQueue。在执行定时任务的时候，每个任务的执行时间都不同，所以DelayedWorkQueue的工作就是按照执行时间的升序来排列，执行时间距离当前时间越近的任务在队列的前面。堆结构在执行插入和删除操作时的最坏时间复杂度是 O(logN)。
 
+#### [优雅的使用线程池](https://zhuanlan.zhihu.com/p/60986630)
+
+`FixedThreadPool`使用了一个无长度限制的等待队列，一旦空闲线程被用尽，就会向队列中加入任务，这时一旦任务进入速度远高于线程处理能力，就有出现OOM的可能。`CachedThreadPool`将空闲线程销毁前的等待时间设置成了60s，同时采用`SynchronousQueue`，不进行等待队列的设置。`CachedThreadPool`在一定程度上能够应对不间断突增的并发量，但是一旦对总量把控不好，就容易引发OOM。
+
+实现线程池阻塞提交的方式：
+
+- 变更拒绝策略
+
+```java
+threadPool = new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>(nThreads * 2),
+                Executors.defaultThreadFactory(), new RejectedExecutionHandler() {
+                    @Override
+                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                        if (!executor.isShutdown()) {
+                            try {
+                                executor.getQueue().put(r);
+                            } catch (InterruptedException e) {
+                                log.error("", e);
+                            }
+                        }
+                    }
+                });
+```
+
+- 使用信号量控制
+
+```java
+public void submit(Runnable r) { //wrap original submit with semaphore
+    executor.submit(() -> {
+        try {
+           semaphore.acquire();
+           r.run();
+           semaphore.release();
+        } catch (InterruptedException e) {
+           e.printStackTrace();
+        }
+    });
+}
+```
+
+- [使用BlockingQueue控制](https://blog.csdn.net/qq_22351805/article/details/101062332)
+
+```java
+BlockingQueue<Data> blockingQueue = new ArrayBlockingQueue<Data>(5);
+blockingQueue.put(new Data());
+threadPool.submit( ()->{return process( blockingQueue.take());});
+```
+
 参考：
 
 [聊聊并发（三）Java线程池的分析和使用](http://www.infoq.com/cn/articles/java-threadPool)

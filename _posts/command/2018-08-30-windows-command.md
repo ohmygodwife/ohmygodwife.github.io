@@ -7,6 +7,15 @@ category: command
 tags: []
 ---
 
+#### HTTP下载文件
+
+```
+C:\\Windows\\System32\\certutil.exe -urlcache -split -f http://xxx.cn/test.txt
+
+$client = new-object System.Net.WebClient
+$client.DownloadFile('https://com/in.txt','D:\out.txt')
+```
+
 #### 进程查看与终止
 
 ```
@@ -59,7 +68,25 @@ cmd /k cd "$(CURRENT_DIRECTORY)" & python "$(FULL_CURRENT_PATH)" & EXIT #NppExec
 vmware-vdiskmanager.exe -k "F:\Fc\FC.vmdk"
 ```
 
+#### [vmware显示虚拟机繁忙状态，无法关闭](https://blog.csdn.net/qq_44500635/article/details/106789982)
+
+编辑->首选项->设备->启用虚拟打印机
+
 #### VirturalBox更新后休眠的虚拟机报错误E_FAIL (0x80004005) 
 
 右键->清除保存的状态，设置->USB设备->停用USB控制器
 
+#### 卸载默认文件共享
+
+```
+net share C$ /delete
+```
+
+#### [设置jar文件默认打开方式](https://www.jianshu.com/p/44ab80e80b83)
+
+注册表编辑器，`计算机\HKEY_CLASSES_ROOT\Applications\javaw.exe\shell\open\command`，将`"D:\javahjbl\jdk1.8.0_191\bin\javaw.exe" "%1"`修改为 `"D:\javahjbl\jdk1.8.0_191\bin\javaw.exe" -jar "%1"`，然后把[jar文件默认打开方式设置为javaw.exe](https://blog.csdn.net/lidashent/article/details/109390429)。
+
+- java.exe　　用于启动window console 控制台程序
+- javaw.exe　　用于启动 GUI程序
+- javaws.exe　　用于web程序
+- jvm.dll　　就是java虚拟机规范在windows平台上的一种实现

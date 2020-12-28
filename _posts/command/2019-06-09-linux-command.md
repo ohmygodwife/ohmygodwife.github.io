@@ -18,9 +18,12 @@ find jlib -name "*.jar" | awk '{print "jar -tvf "$1}' | sh -x | grep "ProtocolEx
 find -L dir -name "*.java" | xargs grep "ProtocolException" #search text in file
 
 #decompress
-tar zxvf nmap-i386-em-distro.tar.gz #x for decompress
-unzip nmap-i386-em-distro.zip -d ./abc/
-bzip2 -cd nmap.tar.bz2 | tar xvf -
+*.gz: tar zxvf nmap-i386-em-distro.tar.gz #x for decompress
+*.zip: unzip nmap-i386-em-distro.zip -d ./abc/
+*.tar.bz2: tar -xjvf *.tar.bz2
+*.lzma: tar --lzma -xvf *.tar.lzma
+*.xz: tar -xJvf *.tar.xz
+*.lrz: lrzuntar *.tar.lrz
 
 #compress
 tar zcvf nmap-i386-em-distro.tar.gz nmap #c for compress
