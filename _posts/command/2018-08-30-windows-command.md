@@ -90,3 +90,13 @@ net share C$ /delete
 - javaw.exe　　用于启动 GUI程序
 - javaws.exe　　用于web程序
 - jvm.dll　　就是java虚拟机规范在windows平台上的一种实现
+
+#### 下载网络视频
+
+[you-get](https://github.com/soimort/you-get)
+
+```
+you-get -i 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+you-get --format=dash-flv720 [URL] --playlist
+```
+

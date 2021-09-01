@@ -33,6 +33,8 @@ mathjax: true
 some useful Latex
 
 ```latex
+\leq #小于等于
+\geq #大于等于
 \equiv #恒等
 \approx #约等
 \int_{-N}^{N} e^x\, dx #积分
@@ -42,5 +44,9 @@ some useful Latex
 \sqrt[n]{m} #对m开n次方
 \frac{3}{5} #分数
 \bmod #模
+\infty #无穷大
+\in #属于
+\alpha \beta \gamma \delta \zeta \lambda \mu \epsilon #https://blog.csdn.net/xxzhangx/article/details/52778539
+\lvert \rvert #||
 ```
 

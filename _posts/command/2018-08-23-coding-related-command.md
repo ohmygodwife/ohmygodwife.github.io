@@ -191,3 +191,13 @@ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
 ```
 
+## Nodejs
+
+#### [开发electron程序的npm准备工作](http://www.6yang.net/articles_view_1494_26.html)
+
+```
+npm config set registry https://registry.npm.taobao.org/
+npm config set electron_mirror http://npm.taobao.org/mirrors/electron/
+npm config edit #verify
+```
+
