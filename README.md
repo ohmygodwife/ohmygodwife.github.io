@@ -31,12 +31,17 @@ mathjax: true
 ```
 
 some useful Latex
-
+https://detexify.kirelabs.org/classify.html #画图查
+https://blog.csdn.net/zgj926503/article/details/52757631
 ```latex
+\tag{1}
+\varphi #欧拉函数
 \leq #小于等于
 \geq #大于等于
 \equiv #恒等
+\neq #不等于
 \approx #约等
+\nmid #不整除
 \int_{-N}^{N} e^x\, dx #积分
 \sum_{i=1}^k #求和
 \prod_{i=1}^k #求积
@@ -48,5 +53,18 @@ some useful Latex
 \in #属于
 \alpha \beta \gamma \delta \zeta \lambda \mu \epsilon #https://blog.csdn.net/xxzhangx/article/details/52778539
 \lvert \rvert #||
+#matrix
+\left[
+\begin{matrix}
+ 1 & 2 & 3\\
+ 4 & 5 & 6\\
+\end{matrix}
+\right]
+#list
+\left\{\begin{array}{c} a \\ b \\ \vdots \\ c \end{array} \right.
+#cases
+\begin{cases} 1, &p\nmid a\\
+-1, &p\nmid a\\
+0, &p\mid a\end{cases}
 ```
 

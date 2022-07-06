@@ -19,6 +19,8 @@ tags: []
 >cl.exe /Fe:solve.exe main.cpp #/Fe:指定输出文件名
 ```
 
+const wchar_t*类型实参与PTSTR类型形参不兼容：右键项目->属性->C/C++->语言->符合模式选否
+
 #### GCC编译C/C++代码
 
 ```sh
@@ -58,6 +60,7 @@ dumpbin /dependents a.exe
 ```shell
 pip install -i http://pypi.douban.com/simple --trusted-host pypi.douban.com software
 --default-timeout=100 #报socket.timeout错误时加上
+pip config set global.index-url https://pypi.douban.com/simple #设置全局
 ```
 
 #### Python通过setup.py安装卸载

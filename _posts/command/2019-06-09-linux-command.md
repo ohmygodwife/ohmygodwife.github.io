@@ -92,5 +92,11 @@ ll -i /var/log/messages*
 
 #memory leak check
 valgrind --tool=memcheck --leak-check=full --show-reachable=yes --error-limit=no --log-file=proglog ./a.out
+
+#批量去除后缀名
+for i in `ls`; do mv $i `echo "$i" | awk -F '.broken' '{print $1}'`; done
+
+#统计文件不重复单词数
+tr -d [:punct:] < file | tr 'A-Z' 'a-z'| tr ' ' '\n' | sort | uniq -c | wc -l
 ```
 
