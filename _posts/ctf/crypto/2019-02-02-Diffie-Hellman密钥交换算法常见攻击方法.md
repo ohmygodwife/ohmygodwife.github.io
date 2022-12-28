@@ -20,9 +20,15 @@ $$
 
 指数a称为A以g为基数的模p的离散对数（指数），记为：ind_g,p(A)。可见：DH算法的有效性依赖于计算离散对数的难度，即通过公钥难以直接计算私钥。（对比：RSA一般是计算模根）
 
-#### A，g，p较小，直接计算a
+#### A，g，p较小，离散对数直接计算a
 
 - [Discrete logarithm calculator](https://www.alpertron.com.ar/DILOG.HTM)（结果有时不准确）
+
 - 利用[sympy库](https://blog.csdn.net/qq_43531895/article/details/106108139)：`sympy.ntheory.discrete_log(p, A, g)`
+
 - [pohlig-hellman算法](https://blog.csdn.net/oampamp1/article/details/104061969)
+  $$
+  p=x*y\\g^a=g^{(k*(x-1)+amodxminus1)}=g^{amodxminus1}\mod x\\分别求得amodxminus1和amodyminus1，通过中国剩余定理求得a
+  $$
+  
 
