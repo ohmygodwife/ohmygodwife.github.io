@@ -26,9 +26,13 @@ $$
 
 - 利用[sympy库](https://blog.csdn.net/qq_43531895/article/details/106108139)：`sympy.ntheory.discrete_log(p, A, g)`
 
-- [pohlig-hellman算法](https://blog.csdn.net/oampamp1/article/details/104061969)
-  $$
-  p=x*y\\g^a=g^{(k*(x-1)+amodxminus1)}=g^{amodxminus1}\mod x\\分别求得amodxminus1和amodyminus1，通过中国剩余定理求得a
-  $$
-  
+#### p可分解为小素数
 
+[pohlig-hellman算法](https://blog.csdn.net/oampamp1/article/details/104061969)
+$$
+p=x*y\\g^a=g^{(k*(x-1)+amodxminus1)}=g^{amodxminus1}\mod x\\分别求得amodxminus1和amodyminus1，通过中国剩余定理求得a
+$$
+
+#### p为`4k+1`型素数
+
+p=prime * 2 ** bits，可求解离散对数小于bits位的情况，Cipolla算法（sample：strange_p, yiwang-2023）

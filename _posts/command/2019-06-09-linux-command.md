@@ -8,6 +8,9 @@ tags: []
 ---
 
 ```shell
+#cat all file name into ONE, sample:babyMisc, 230422nssctf.
+find ./Script -type f > list
+
 #sort file and list epoch time
 ls -t | xargs stat -c%n:%Y
 

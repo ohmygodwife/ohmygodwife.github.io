@@ -11,6 +11,12 @@ tags: [git]
 
 ## [git仓库](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%8E%B7%E5%8F%96-Git-%E4%BB%93%E5%BA%93)
 
+```
+git clone https://username:ghp_TOKEN@github.com/<USERNAME>/<REPO>.git #private repo
+git remote set-url origin https://username:ghp_TOKEN@github.com/<USERNAME>/<REPO>.git #ignore password
+git config --global http.sslVerify "false" #OpenSSL SSL_read:SSL_ERROR_SYSCALL, errno 10054
+```
+
 **新建本地仓库**（local repository）方法有两种：
 
 1. 根据本地已有项目，进入该项目目录，运行：
@@ -65,6 +71,7 @@ $ git commit -m 'initial commit'
 $ git add forgotten_file
 $ git commit --amend #最终只会有一个提交 - 第二次提交将代替第一次提交的结果
 
+$ git reset --hard [<commit>] #commit之后的修改被撤销
 $ git reset HEAD CONTRIBUTING.md #将已staged的文件改为unstaged
 $ git checkout -- CONTRIBUTING.md #撤销某个文件的修改，由于未commit，撤销就再也找不到了，慎用！
 ```

@@ -39,7 +39,7 @@ ag"
 
 #### 写shellcode
 
-###### [shellcode范围printable](https://taqini.space/2020/03/31/alpha-shellcode-gen)
+###### [shellcode范围printable](https://taqini.github.io/2020/03/31/alpha-shellcode-gen/)
 
 sample：[shellcode_revenge](https://blog.csdn.net/weixin_44145820/article/details/105565953)，mrctf2020，借助[alpha3](https://github.com/TaQini/alpha3)
 

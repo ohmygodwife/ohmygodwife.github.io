@@ -16,6 +16,10 @@ $client = new-object System.Net.WebClient
 $client.DownloadFile('https://com/in.txt','D:\out.txt')
 ```
 
+#### 查看哪个进程使用文件
+
+任务管理器->性能->打开资源监视器->选CPU->关联的句柄中搜索对应文件名
+
 #### 进程查看与终止
 
 ```
