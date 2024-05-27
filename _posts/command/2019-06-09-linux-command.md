@@ -8,6 +8,9 @@ tags: []
 ---
 
 ```shell
+#cat file line as argument
+xargs -I {} echo {} < file.txt
+
 #cat all file name into ONE, sample:babyMisc, 230422nssctf.
 find ./Script -type f > list
 
@@ -76,6 +79,7 @@ sudo visudo -f /etc/sudoers
 
 #check service
 chkconfig --list|grep telnet
+systemctl list-units --type=service
 
 #mount vituralbox sharefolder
 mount -t vboxsf sharefolder /root/hello
