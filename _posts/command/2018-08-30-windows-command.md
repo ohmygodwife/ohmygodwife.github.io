@@ -104,3 +104,11 @@ you-get -i 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
 you-get --format=dash-flv720 [URL] --playlist
 ```
 
+#### 热点无法上网
+
+```
+Win + X 键，选择 “终端（管理员）” 或 “命令提示符（管理员）”
+net stop SharedAccess
+net start SharedAccess
+```
+
