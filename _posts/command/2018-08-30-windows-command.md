@@ -112,3 +112,6 @@ net stop SharedAccess
 net start SharedAccess
 ```
 
+#### GIMP
+
+图像-》缩放图像， X/Y resolution 选`300 pixels/in（DPI）`，身份证大小：`5.4*8.56cm`，户口本大小：`14.3*10.5cm`。文件-》导出为，选jpg，`在图像窗口中显示预览`。
